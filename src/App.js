@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import { IoIosAdd } from "react-icons/io";
+import { FaSearch } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
+import { FaCaretSquareRight } from "react-icons/fa";
 
 function App() {
     const [users, setUsers] = useState([]);
@@ -74,53 +80,59 @@ function App() {
     };
 
     return (
-        <div>
-            <h2>Add User</h2>
+        <div className='container'>
+            <h2 className='Addline'>Add User</h2>
             <input
+            className='input'
                 type="text"
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
             <input
+            className='input'
                 type="number"
                 placeholder="Age"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
             />
-            <button onClick={addUser}>Add</button>
-            <h2>Get User by ID</h2>
+            <button  className='btn' onClick={addUser}> <IoIosAdd className='icons' /> </button>
+           
+            <h2 className='Addline' >Get User by ID</h2>
             <input
+                 className='input'
                 type="number"
                 placeholder="User ID"
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
             />
-            <button onClick={() => fetchUser(userId)}>Fetch User</button>
-            <h1>Users</h1>
+            <button  className='btn' onClick={() => fetchUser(userId)}><FaSearch className='icons' /> </button>
+            <h1 className='Addline' >Users</h1>
             <ul>
                 {users.map(user => (
                     <li key={user.id}>
                         {editUserId === user.id ? (
                             <>
                                 <input
+                                className='input'
                                     type="text"
                                     value={editName}
                                     onChange={(e) => setEditName(e.target.value)}
                                 />
                                 <input
+                                    className='input'
                                     type="number"
                                     value={editAge}
                                     onChange={(e) => setEditAge(e.target.value)}
                                 />
-                                <button onClick={() => updateUser(user.id)}>Update</button>
-                                <button onClick={() => setEditUserId(null)}>Cancel</button>
+                                <button className='btn' onClick={() => updateUser(user.id)}><FaCaretSquareRight className='icons' />  </button>
+                                <button className='btn' onClick={() => setEditUserId(null)}> <MdCancel className='icons' /> </button>
                             </>
                         ) : (
                             <>
                                 {user.name} - {user.age}
-                                <button onClick={() => handleEditClick(user)}>Edit</button>
-                                <button onClick={() => deleteUser(user.id)}>Delete</button>
+                                <button className='btn' onClick={() => handleEditClick(user)}> <FaEdit className='icons' />  </button>
+                                <button className='btn' onClick={() => deleteUser(user.id)}> <MdDelete className='icons' /> </button>
                             </>
                         )}
                     </li>
@@ -135,13 +147,14 @@ function App() {
                     <p>Age: {user.age}</p>
                 </div>
             )}
-            <h2>Delete User by ID</h2>
+            <h2 className='Addline' >Delete User by ID</h2>
             <input
+            className='input'
                 type="number"
                 placeholder="User ID"
                 onChange={(e) => setUserId(e.target.value)}
             />
-            <button onClick={() => deleteUser(userId)}>Delete</button>
+            <button className='btn' onClick={() => deleteUser(userId)}><MdDelete className='icons' /></button>
         </div>
     );
 }
